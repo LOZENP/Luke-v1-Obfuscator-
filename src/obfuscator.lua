@@ -15,25 +15,25 @@ local defaultConfig = {
     stringEncryption = true,
     constantPooling = true,
     deadCodeInjection = true,
-    antiDebug = true,
+    antiDebug = false,
     vmBytecode = true,
-    encryptionLayers = 2,
-    dummyInstructionRatio = 0.4,
-    maxStringChunkSize = 64,
+    encryptionLayers = 5,
+    dummyInstructionRatio = 0.30,
+    maxStringChunkSize = 105,
     nameObfuscationStyle = "random"
 }
 
 function Obfuscator.setConfigByLevel(config)
     if config.level == 1 then
         -- Light obfuscation
-        config.controlFlowObfuscation = false
-        config.deadCodeInjection = false
+        config.controlFlowObfuscation = true
+        config.deadCodeInjection = true
         config.antiDebug = false
         config.encryptionLayers = 1
         config.dummyInstructionRatio = 0.1
     elseif config.level == 2 then
         -- Medium obfuscation
-        config.controlFlowObfuscation = false
+        config.controlFlowObfuscation = true
         config.deadCodeInjection = true
         config.antiDebug = false
         config.encryptionLayers = 1
@@ -42,16 +42,16 @@ function Obfuscator.setConfigByLevel(config)
         -- Heavy obfuscation (default)
         config.controlFlowObfuscation = true
         config.deadCodeInjection = true
-        config.antiDebug = true
+        config.antiDebug = false
         config.encryptionLayers = 2
         config.dummyInstructionRatio = 0.4
     elseif config.level == 4 then
         -- Extreme obfuscation
         config.controlFlowObfuscation = true
         config.deadCodeInjection = true
-        config.antiDebug = true
-        config.encryptionLayers = 3
-        config.dummyInstructionRatio = 0.6
+        config.antiDebug = false
+        config.encryptionLayers = 10
+        config.dummyInstructionRatio = 0.30
     end
     
     return config
